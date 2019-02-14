@@ -75,8 +75,10 @@ public class MainActivity extends AppCompatActivity {
 
             Log.e("connectPLC" , String.valueOf(s7Client.Connected));
 
-            new ReadFromPLC().execute();
+
             //new WriteToPLC().execute();
+            new ReadFromPLC().execute();
+
 
         }
 
@@ -134,14 +136,16 @@ public class MainActivity extends AppCompatActivity {
 
             Log.e("ReadFromPLC" , "data - " + Arrays.toString(data));
 
-            res = s7Client.ReadArea(S7.S7AreaPA, 0, 0, 2, data);
+            res = s7Client.ReadArea(S7.S7AreaMK, 0, 0, 0, data);
 
             Log.e("ReadFromPLC" , "res - " + res);
+            Log.e("ReadFromPLC" , "ERROR - " + S7Client.ErrorText(res));
             Log.e("ReadFromPLC" , "data - " + Arrays.toString(data));
 
-            res = s7Client.ReadArea(S7.S7AreaPE, 0, 0, 2, data);
+            res = s7Client.ReadArea(S7.S7AreaMK, 0, 0, 0, data);
 
             Log.e("ReadFromPLC" , "res - " + res);
+            Log.e("ReadFromPLC" , "ERROR - " + S7Client.ErrorText(res));
             Log.e("ReadFromPLC" , "data - " + Arrays.toString(data));
 
             /*

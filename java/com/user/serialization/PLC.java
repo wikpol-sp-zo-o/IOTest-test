@@ -397,27 +397,6 @@ public class PLC implements Runnable {
         }
     }
 
-    public int getInt(boolean fromPLC,int address) throws Exception {
-        byte[] source;
-        if (fromPLC) {
-            synchronized (this.plcToPcLock) {
-                source = this.plcToPc;
-                if (address >= source.length-1) {
-                    throw new Exception("PLC out of boundaries: " + this.PLCName + " in DB " + this.plcToPcDb + " at address " + address);
-                }
-                return ((source[address] & 0xff) << 8) | (source[address+1] & 0xff);
-            }
-        } else {
-            synchronized (this.pcToPlcLock) {
-                source = this.pcToPlc;
-                if (address >= source.length-1) {
-                    throw new Exception("PLC out of boundaries: " + this.PLCName + " in DB " + this.pcToPlcDb + " at address " + address);
-                }
-                return ((source[address] & 0xff) << 8) | (source[address+1] & 0xff);
-            }
-        }
-    }
-
     public int getIntFromByte(boolean fromPLC,int address) throws Exception {
         byte[] source;
         if (fromPLC) {
@@ -530,7 +509,7 @@ public class PLC implements Runnable {
                 this.connected = true;
                 this.LastError = this.moka.LastError;
 
-                Log.e("connectPLC" , "jest kurwaaa");
+                Log.e("connectPLC" , "");
 
                 if (this.firstConnect == true) {
 
